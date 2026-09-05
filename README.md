@@ -8,7 +8,7 @@ What RiskLens does
 
 Given a market such as BTCUSDT, RiskLens can:
 
-1. Access live Binance market information through the Binance Agent OS MCP connection.
+1. Access live Binance market information through Binance's public market-data API, while the project is designed to integrate with Binance Agent OS as its AI-agent connection layer.
 2. Examine multiple timeframes, including 15m, 1h, and 4h.
 3. Compare short-, medium-, and higher-timeframe market direction.
 4. Identify whether signals are aligned or mixed.
@@ -18,7 +18,7 @@ Given a market such as BTCUSDT, RiskLens can:
 
 Binance Agent OS integration
 
-RiskLens uses the official Binance Agent OS MCP endpoint:
+RiskLens is designed to use Binance Agent OS as the AI-agent connection layer, while the current prototype uses Binance's public market-data API for live BTCUSDT data and automated testing.
 
 https://agent.binance.com/mcp/agentic
 
@@ -26,20 +26,7 @@ The MCP connection allows the AI agent to access Binance market information and 
 
 Architecture
 
-User
-↓
-RiskLens AI Agent
-↓
-Binance Agent OS
-↓
-Binance MCP
-↓
-Live Binance Market Data
-↓
-RiskLens Multi-Timeframe Analysis
-↓
-Structured Risk Report
-
+User → RiskLens AI Agent → Binance Agent OS / MCP → Binance Market Data → RiskLens Multi-Timeframe Analysis → Structured Risk Report
 Example
 
 A user can ask:
