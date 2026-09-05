@@ -32,9 +32,9 @@ def analyze(snapshot):
     candles_1h = snapshot["1h"]
     candles_4h = snapshot["4h"]
 
-    c15 = candles_15m[-1]
-    c1h = candles_1h[-1]
-    c4h = candles_4h[-1]
+    cc15 = candles_15m[-2]
+c1h = candles_1h[-2]
+c4h = candles_4h[-2]
 
     signals = []
 
