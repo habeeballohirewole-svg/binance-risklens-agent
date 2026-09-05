@@ -34,7 +34,7 @@ def get_btcusdt_price():
     return float(data["price"])
 
 
-def get_btcusdt_candles(interval, limit=1):
+def gdef get_btcusdt_candles(interval, limit=2):
     """Get the latest BTCUSDT candlestick data."""
     data = get_json(
         "/api/v3/klines",
