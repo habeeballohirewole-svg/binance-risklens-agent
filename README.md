@@ -1,56 +1,108 @@
-# Binance RiskLens Agent
+Binance RiskLens Agent
 
-A hackathon-ready Track A prototype for Binance Agent OS.
+RiskLens is a Track A hackathon prototype built around Binance Agent OS.
 
-## What it does
+It is an AI-powered market-risk analysis agent that turns Binance market data into a structured, disciplined trading research report.
 
-RiskLens is an AI market-analysis agent designed to turn Binance market data into a disciplined trading research report.
+What RiskLens does
 
-Given a symbol such as BTCUSDT, it:
-1. Pulls live Binance market data through the Binance Agent OS MCP connection.
-2. Examines multiple timeframes.
-3. Identifies trend, momentum, support/resistance and volatility.
-4. Produces a structured setup with entry zones, invalidation and risk/reward.
-5. Refuses to manufacture missing data and clearly labels uncertainty.
-6. Never places an order unless the user explicitly asks and the connected permissions allow it.
+Given a market such as BTCUSDT, RiskLens can:
 
-## Agent OS connection
+1. Access live Binance market information through the Binance Agent OS MCP connection.
+2. Examine multiple timeframes, including 15m, 1h, and 4h.
+3. Compare short-, medium-, and higher-timeframe market direction.
+4. Identify whether signals are aligned or mixed.
+5. Produce a clear risk level and market outlook.
+6. Highlight uncertainty instead of inventing missing information.
+7. Provide analysis for research and decision support rather than blindly executing trades.
 
-The project is configured for the official Binance MCP endpoint:
+Binance Agent OS integration
 
-`https://agent.binance.com/mcp/agentic`
+RiskLens uses the official Binance Agent OS MCP endpoint:
 
-Binance states that Agent OS can connect AI agents to Binance market data and trading capabilities, with permissions controlled by the user.
+https://agent.binance.com/mcp/agentic
 
-## Quick start
+The MCP connection allows the AI agent to access Binance market information and use it as the live data layer for RiskLens analysis.
 
-This repo is intended to be opened in a supported agent environment such as Claude Code, Codex, ChatGPT or VS Code.
+Architecture
 
-1. Open the project.
-2. Connect/authenticate the Binance MCP server.
-3. Load `AGENTS.md` as the agent's operating instructions.
-4. Ask:
+User
+↓
+RiskLens AI Agent
+↓
+Binance Agent OS
+↓
+Binance MCP
+↓
+Live Binance Market Data
+↓
+RiskLens Multi-Timeframe Analysis
+↓
+Structured Risk Report
 
-   `Run a RiskLens analysis on BTCUSDT using 15m, 1h and 4h.`
+Example
 
-For the hackathon demo, keep the agent in read-only/analysis mode.
+A user can ask:
 
-## Example demo prompts
+«Using Binance Agent OS, analyze BTCUSDT across the 15m, 1h and 4h timeframes.»
 
-- `Analyze BTCUSDT with RiskLens.`
-- `Compare ETHUSDT and SOLUSDT and rank them by setup quality.`
-- `What would invalidate the current BTCUSDT thesis?`
-- `Give me a conservative setup and explain the risk.`
-- `Re-run the analysis and tell me what changed.`
+RiskLens can return:
 
-## Safety design
+- Current BTCUSDT price
+- Multi-timeframe market signals
+- Risk level
+- Market outlook
+- Key observations
+- Clear uncertainty when data is insufficient
 
-RiskLens is analysis-first. It does not assume that an AI signal is financial advice. It does not invent prices, indicators or order-book information. Trade execution should remain disabled for the demo unless explicitly authorized.
+Project files
 
-## Hackathon pitch
+risklens_agent.py
 
-**RiskLens — from market noise to a disciplined decision brief.**
+The main RiskLens agent layer. It combines the market-data layer with the RiskLens analysis engine and produces a structured report.
 
-Most trading assistants answer questions. RiskLens follows a repeatable workflow: collect live data → cross-check timeframes → score the setup → expose invalidation → communicate uncertainty.
+risklens_analyzer.py
 
-This makes the agent useful even when the correct action is **do nothing**.
+Contains the multi-timeframe risk-analysis logic.
+
+risklens_binance.py
+
+Contains the Binance market-data functions used by the prototype and automated tests.
+
+demo/DEMO_SCRIPT.md
+
+Contains the planned demonstration flow for presenting RiskLens.
+
+Testing
+
+The repository includes a GitHub Actions workflow that automatically tests the RiskLens analysis code.
+
+The workflow verifies that the project can retrieve Binance market data and successfully produce a RiskLens analysis.
+
+Design principles
+
+Risk first
+
+RiskLens focuses on understanding market conditions before discussing a trading setup.
+
+Multi-timeframe confirmation
+
+Signals are compared across multiple timeframes rather than relying on a single candle.
+
+No fabricated data
+
+If required information is unavailable, RiskLens should clearly state the limitation instead of making up values.
+
+Human decision support
+
+RiskLens is designed to assist traders with market research. It does not encourage blind execution or guarantee profits.
+
+Hackathon Track
+
+Binance Agent OS Mini Hackathon — Track A
+
+RiskLens demonstrates how an AI agent can use Binance Agent OS as a market-data connection layer and transform that information into useful, structured risk intelligence.
+
+Disclaimer
+
+RiskLens is an experimental hackathon project for educational and research purposes. Market analysis is uncertain and should not be considered financial advice or a guarantee of trading results.
