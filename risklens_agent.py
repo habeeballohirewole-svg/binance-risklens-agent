@@ -1,13 +1,8 @@
 """
 RiskLens — Binance Agent OS Risk Analysis Agent
 
-RiskLens is an AI-agent layer for Binance market intelligence.
-It combines Binance market data with simple multi-timeframe
-risk analysis to help users understand market conditions.
-
-The Binance Agent OS MCP endpoint can provide market information
-to the AI agent, while this module contains the RiskLens analysis
-logic.
+RiskLens combines Binance market data with multi-timeframe
+risk analysis to produce a structured market intelligence report.
 """
 
 from risklens_analyzer import analyze
@@ -15,9 +10,7 @@ from risklens_binance import get_market_snapshot
 
 
 def run_risklens():
-    """
-    Run a RiskLens market-risk assessment using Binance data.
-    """
+    """Run a RiskLens market-risk assessment."""
 
     snapshot = get_market_snapshot()
     result = analyze(snapshot)
@@ -28,13 +21,17 @@ def run_risklens():
         "symbol": result["symbol"],
         "price": result["price"],
         "signals": result["signals"],
+        "changes": result["changes"],
+        "support": result["support"],
+        "resistance": result["resistance"],
         "risk_level": result["risk_level"],
+        "confidence": result["confidence"],
         "outlook": result["outlook"],
     }
 
 
 def format_report(result):
-    """Create a human-readable RiskLens report."""
+    """Create a structured human-readable RiskLens report."""
 
     lines = [
         "=== RiskLens Agent Report ===",
@@ -48,10 +45,20 @@ def format_report(result):
     for signal in result["signals"]:
         lines.append(f"- {signal}")
 
+    lines.append("")
+    lines.append("Momentum:")
+
+    for timeframe, change in result["changes"].items():
+        lines.append(f"- {timeframe}: {change:.4f}%")
+
     lines.extend(
         [
             "",
+            f"Support: {result['support']}",
+            f"Resistance: {result['resistance']}",
+            "",
             f"Risk level: {result['risk_level']}",
+            f"Confidence: {result['confidence']}",
             f"Outlook: {result['outlook']}",
         ]
     )
@@ -60,5 +67,5 @@ def format_report(result):
 
 
 if __name__ == "__main__":
-    report = run_risklens()
-    print(format_report(report))
+    result = run_risklens()
+    print(format_report(result))
