@@ -17,4 +17,4 @@ jobs:
           python-version: "3.12"
 
       - name: Test Binance market data
-        run: python risklens_analyzer.py
+        run: python risklens_agent.py
