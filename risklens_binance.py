@@ -10,7 +10,7 @@ import urllib.parse
 import urllib.request
 
 
-BINANCE_API = "https://api1.binance.com"
+BINANCE_API = "https://data-api.binance.vision"
 
 
 def get_json(path, params=None):
